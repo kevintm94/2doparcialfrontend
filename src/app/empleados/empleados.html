@@ -1,1 +1,33 @@
-<p>empleados works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados</title>
+</head>
+<body>
+    <h2 class="text-center">Lista de empleados</h2>
+    <button class="btn btn-primary">Nuevo empleado</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>nombre</th>
+                <th>apellido</th>
+                <th>correo</th>
+                <th>salario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of empleados">
+                <td>{{ e.nombre }}</td>
+                <td>{{ e.apellido }}</td>
+                <td>{{ e.correo }}</td>
+                <td>{{ e.salario }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
