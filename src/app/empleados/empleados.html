@@ -4,30 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <h2 class="text-center">Lista de empleados</h2>
-    <button class="btn btn-primary">Nuevo empleado</button>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>nombre</th>
-                <th>apellido</th>
-                <th>correo</th>
-                <th>salario</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let e of empleados">
-                <td>{{ e.nombre }}</td>
-                <td>{{ e.apellido }}</td>
-                <td>{{ e.correo }}</td>
-                <td>{{ e.salario }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h2 class="text-center">Empleados</h2>
+    <div class="row g-2 mx-5">
+        <div class="col-auto">
+            <form class="row g-4 mx-5" action="">
+                <div class="col-auto">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" ngModel="empleadoSelected?.nombre" #nombre>
+                </div>
+        
+                <div class="col-auto">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" #apellido>
+                </div>
+        
+                <div class="col-auto">
+                    <label for="correo">Correo</label>
+                    <input type="email" name="correo" id="correo" #correo>
+                </div>
+        
+                <div class="col-auto">
+                    <label for="salario">Salario</label>
+                    <input type="text" name="salario" id="salario" #salario>
+                </div>
+            </form>
+        </div>
+        <div class="col-auto">
+            <button *ngIf="empleadoSelected==0" class="btn btn-primary mb-3" (click)="registrarEmpleado({nombre: nombre.value, apellido: apellido.value, correo: correo.value, salario: salario.value}); nombre.value='';apellido.value='';correo.value='';salario.value='';">Guardar</button>
+        
+            <button *ngIf="empleadoSelected!=0" class="btn btn-primary mb-3" (click)="actualizarEmpleado({nombre: nombre.value, apellido: apellido.value, correo: correo.value, salario: salario.value}); nombre.value='';apellido.value='';correo.value='';salario.value='';">Actualizar</button>
+        </div>
+    </div>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <h2 class="text-center">Lista de empleados</h2>
+    <!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo empleado</button-->
+    <div class="mx-5 my-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>apellido</th>
+                    <th>correo</th>
+                    <th>salario</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of empleados">
+                    <td>{{ e.nombre }}</td>
+                    <td>{{ e.apellido }}</td>
+                    <td>{{ e.correo }}</td>
+                    <td>{{ e.salario }}</td>
+                    <td><button class="btn btn-warning" (click)="editarEmpleado(e); nombre.value=e.nombre;apellido.value=e.apellido;correo.value=e.correo;salario.value=e.salario;">Editar</button></td>
+                    <td><button class="btn btn-danger" (click)="eliminarEmpleado(e.id)">Borrar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>
 </html>
